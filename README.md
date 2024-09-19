@@ -1,4 +1,4 @@
-# openblock-resource
+# ThingEduBlock Resource Server
 
 [![Publish npm package](https://github.com/openblockcc/openblock-resource/actions/workflows/publish.yml/badge.svg)](https://github.com/openblockcc/openblock-resource/actions/workflows/publish.yml)
 ![GitHub](https://img.shields.io/github/license/openblockcc/openblock-resource)
@@ -20,3 +20,9 @@ Provide a local resource server for openblock.
     ```bash
     npm test
     ```
+
+## Devices included
+
+- [X] CoBot - ThingEdu
+- [X] ViaBanhMi - MakerViet
+- [X] ThingBot - ThingEdu (CoBot extended)
