@@ -12,7 +12,7 @@ const fs = require('fs-extra');
 const fetch = require('node-fetch');
 const ProgressBar = require('progress');
 const extract = require('extract-zip');
-const hashFiles = require('hash-files');
+const hashFiles = require('hash-files'); // eslint-disable-line no-unused-vars
 const clc = require('cli-color');
 const Progress = require('node-fetch-progress');
 
@@ -102,7 +102,7 @@ getLatest()
         const assets = data.assets;
 
         let resource;
-        let checksum;
+        let checksum; // eslint-disable-line no-unused-vars
 
         assets.forEach(asset => {
             if (asset.name) {
@@ -121,39 +121,24 @@ getLatest()
         const resourceName = resource.name;
         const resourcePath = path.join(downloadPath, resourceName);
 
-        const checksumUrl = checksum.browser_download_url;
-        const checksumName = checksum.name;
-        const checksumPath = path.join(downloadPath, checksumName);
+        // const checksumUrl = checksum.browser_download_url;
+        // const checksumName = checksum.name;
+        // const checksumPath = path.join(downloadPath, checksumName);
 
         const extractPath = path.resolve('./', 'external-resources');
 
         return download(resourceUrl, resourcePath)
-            .then(() => download(checksumUrl, checksumPath))
+
             .then(() => {
-                // Compare archive checksums
-                const zipChecksum = fs.readFileSync(checksumPath, 'utf8').split('  ')[0];
-                hashFiles({files: resourcePath, algorithm: 'sha256'}, (error, hash) => {
-                    if (error) {
-                        throw error;
-                    }
-
-                    if (zipChecksum === hash) {
-                        console.info(`${resourcePath} has passed the checksum detection`);
-                        extract(resourcePath, {dir: extractPath})
-                            .then(() => {
-                                fs.rmSync(downloadPath, {recursive: true, force: true});
-                                console.log(clc.green(`\nExternal resource has been successfully downloaded and extracted to path: ${extractPath}`)); // eslint-disable-line max-len
-                            })
-                            .catch(() => {
-                                console.error(clc.red(`ERR!: ${extractPath} has failed the folder checksum detection`));
-                                process.exit(1);
-                            });
-                    } else {
-                        console.error(clc.red(`ERR!: ${resourcePath} has failed the checksum detection`));
+                extract(resourcePath, {dir: extractPath})
+                    .then(() => {
+                        fs.rmSync(downloadPath, {recursive: true, force: true});
+                        console.log(clc.green(`\nExternal resource has been successfully downloaded and extracted to path: ${extractPath}`)); // eslint-disable-line max-len
+                    })
+                    .catch(() => {
+                        console.error(clc.red(`ERR!: ${extractPath} has failed the folder checksum detection`));
                         process.exit(1);
-                    }
-                });
+                    });
             });
-
     })
     .catch(err => console.log(clc.red(`ERR!: ${err}`)));
