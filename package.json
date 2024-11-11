@@ -1,7 +1,7 @@
 {
-  "name": "thingedublock-resource",
+  "name": "openblock-resource",
   "version": "1.0.0",
-  "description": "External resources for OpenBlock projects",
+  "description": "External resources for ThingEduBlock",
   "main": "index.js",
   "bin": {
     "gen-config": "./script/bin/gen-config.js",
