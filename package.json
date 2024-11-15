@@ -28,7 +28,7 @@
     "test:abort-check": "node test/abortCheckUpdate.js",
     "test:abort-update": "node test/abortUpdate.js"
   },
-  "author": "ArthurZheng",
+  "author": "lgthevinh",
   "license": "MIT",
   "dependencies": {
     "@aws-sdk/client-s3": "^3.598.0",
