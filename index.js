@@ -12,8 +12,8 @@ const {
     DEFAULT_LOCALE
 } = require('./src/config');
 
-class OpenblockResourceServer extends Emitter{
-    constructor (cacheResourcesPath, builtinResourcesPath, locale = DEFAULT_LOCALE) {
+class OpenblockResourceServer extends Emitter {
+    constructor(cacheResourcesPath, builtinResourcesPath, locale = DEFAULT_LOCALE) {
         super();
 
         if (cacheResourcesPath) {
@@ -39,8 +39,7 @@ class OpenblockResourceServer extends Emitter{
         // set in the environment variable first.
         const envOpenBlockExternalResources = process.env.OPENBLOCK_EXTERNAL_RESOURCES;
         if (envOpenBlockExternalResources) {
-            console.info(`env OPENBLOCK_EXTERNAL_RESOURCES: \
-"${envOpenBlockExternalResources}"`);
+            console.info(`env OPENBLOCK_EXTERNAL_RESOURCES: "${envOpenBlockExternalResources}"`);
             this._builtinResourcesPath = envOpenBlockExternalResources;
         } else {
             const thirdPartyResourcesPath = path.join(this._builtinResourcesPath, '../../OpenBlockExternalResources');
@@ -66,7 +65,7 @@ class OpenblockResourceServer extends Emitter{
         this.updater = null;
     }
 
-    checkUpdate (option) {
+    checkUpdate(option) {
         let config;
 
         try {
@@ -94,11 +93,11 @@ class OpenblockResourceServer extends Emitter{
             });
     }
 
-    update (option) {
+    update(option) {
         return this.updater.update(this._latestVersion, option);
     }
 
-    listen (port = null) {
+    listen(port = null) {
         const server = new ResourceServer(this._cacheResourcesPath, this._builtinResourcesPath);
         console.info(`cached external resources path: "${this._cacheResourcesPath}"`);
         console.info(`builtin external resources path: "${this._builtinResourcesPath}"`);
